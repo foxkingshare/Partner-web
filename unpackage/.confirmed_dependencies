@@ -1,0 +1,21 @@
+{
+  "login.html": {
+    "resources": [
+      "img/2.png",
+      "js/main.js",
+      "js/jquery-1.7.min.js",
+      "img/8.png",
+      "js/public.js",
+      "css/style.css",
+      "js/pulsClick.js",
+      "img/7.png",
+      "img/3.png",
+      "js/type.js",
+      "img/1.png",
+      "js/mui.min.js",
+      "img/1.jpg",
+      "img/6.png",
+      "css/my_mui_alter.css"
+    ]
+  }
+}
