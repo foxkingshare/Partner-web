@@ -7,8 +7,42 @@ document.addEventListener('touchstart',shield,false);//取消浏览器的所有�
 document.oncontextmenu=shield;//屏蔽选择函数
 // H5 plus事件处理
 var ws=null,as='pop-in';
-
-
+function plusReady(){
+	ws=plus.webview.currentWebview();
+	// Android处理返回键
+	plus.key.addEventListener('backbutton',function(){
+		back();
+	},false);
+	compatibleAdjust();
+}
+if(w.plus){
+	plusReady();
+}else{
+	document.addEventListener('plusready',plusReady,false);
+}
+// DOMContentLoaded事件处理
+var domready=false;
+document.addEventListener('DOMContentLoaded',function(){
+	domready=true;
+	gInit();
+	document.body.onselectstart=shield;
+	compatibleAdjust();
+},false);
+// 处理返回事件
+w.back=function(hide){
+	if(w.plus){
+		ws||(ws=plus.webview.currentWebview());
+		if(hide||ws.preate){
+			ws.hide('auto');
+		}else{
+			ws.close('auto');
+		}
+	}else if(history.length>1){
+		history.back();
+	}else{
+		w.close();
+	}
+};
 // 处理点击事件
 var openw=null,waiting=null;
 /**
@@ -37,6 +71,7 @@ w.clicked=function(id,wa,ns,ws){
 //		},200);
 		},false);
 		openw.addEventListener('close',function(){//页面关闭后可再次打开
+			
 			openw=null;
 		},false);
 		return openw;
@@ -45,6 +80,39 @@ w.clicked=function(id,wa,ns,ws){
 	}
 	return null;
 };
+
+
+w.subClicked=function(id,wa,ns,ws){
+	if(openw){//避免多次打开同一个页面
+		openw=null;
+	}
+	if(w.plus){
+		wa&&(waiting=plus.nativeUI.showWaiting());
+		ws=ws||{};
+		ws.scrollIndicator||(ws.scrollIndicator='none');
+		ws.scalable||(ws.scalable=false);
+		var pre='';//'http://192.168.1.178:8080/h5/';
+		//openw=plus.webview.create(pre+id,id,ws);
+		 var mainView = plus.webview.getWebviewById("MainView");
+		 openw=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide',top: '0px',bottom: '98px'},{preate:true});
+		 mainView.append(openw);
+
+		ns||openw.addEventListener('loaded',function(){//页面加载完成后才显示
+//		setTimeout(function(){//延后显示可避免低端机上动画时白屏
+			openw.show(as);
+			closeWaiting();
+//		},200);
+		},false);
+		openw.addEventListener('close',function(){//页面关闭后可再次打开
+			openw=null;
+		},false);
+		return openw;
+	}else{
+		w.open(id);
+	}
+	return null;
+};
+
 w.openDoc=function(t,c){
 	var d=plus.webview.getWebviewById('document');
 	if(d){
