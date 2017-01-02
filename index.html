@@ -14,6 +14,7 @@
 
 <body>
 <!--头部start-->
+<div id="index">
 <div class="header-index">
   <ul>
     <li class="m_cell_hd"><a href="javascript:void(0)"><img src="images/63.png" alt="" /></a></li>
@@ -104,25 +105,164 @@ $('#demo01').flexslider({
     </ul>
   </div>
 </div>
+</div>
+
+<div id="message"  style="display:none;">
+<div class="header header-bg">
+  <ul>
+    <h1>消息</h1>
+    <a href="##" title="" class="back"><img src="images/10.png" alt="" width="24" height="42"/></a>
+  </ul>
+</div>
+<!--头部end-->
+
+<!--消息start-->
+<div class="info">
+ <ul>
+   <li>
+     <a href="##" title="">
+       <div class="m_cell_hd"><img src="images/31.png" alt=""/></div>
+       <div class="m_cell_ft m_cell_primary">
+         <h4>有问必答</h4>
+         <p>有什么问题可以在这里咨询？</p>
+       </div>
+     </a>
+   </li>
+   <li>
+     <a href="##" title="">
+       <div class="m_cell_hd"><img src="images/32.png" alt=""/></div>
+       <div class="m_cell_ft m_cell_primary">
+         <h4>系统提示</h4>
+         <p>随时更新消息，记得浏览</p>
+       </div>
+     </a>
+   </li>
+ </ul>
+</div>
+</div>
+
+
+
+<div id="setting"  style="display:none;">
+<div class="login-personall-info">
+  <ul>
+    <li class="login-img"><a href="javascript:void(0)" class="upudate-img"><img src="images/1.png" alt="" /></a></li>
+    <!--未登录start-->
+    <li class="unlogin unlogin01 disable">
+      <h1>亲，你尚未登录呦！</h1>
+    </li>
+    <!--未登录end-->
+    <!--已登录start-->
+    <li class="unlogin unlogin02">
+      <h1>大学生</h1>
+      <p><i>北京化工大学</i></p>
+    </li>
+    <!--已登录end-->
+    <!--未登录-登录入口start-->
+    <li class="unlogin unlogin01 disable">
+      <h1>亲，你尚未登录呦！</h1>
+      <a href="##" title="">登录</a>
+    </li>
+    <!--未登录-登录入口end-->
+    <li class="clearfix login-info">
+      <p class="fl">我的酬金<br/>0.0元</p>
+      <p class="fr">我的收藏<br/>0个</p>
+    </li>
+  </ul>
+</div>
+<!--头部end-->
+
+<!--列表start-->
+<div class="login-personall-info-list">
+  <ul>
+    <li>
+      <a href="javascript:void(0)">
+        <div class="m_cell_hd"><img src="images/54.png" alt="" /></div>
+        <div class="m_cell_hd m_cell_primary"><h4>实名认证</h4></div>
+        <div class="m_cell_ft"><img src="images/46.png" alt="" /></div>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:void(0)">
+        <div class="m_cell_hd"><img src="images/55.png" alt="" /></div>
+        <div class="m_cell_hd m_cell_primary"><h4>校园经理人</h4></div>
+        <div class="m_cell_ft"><img src="images/46.png" alt="" /></div>
+      </a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <a href="javascript:void(0)">
+        <div class="m_cell_hd"><img src="images/56.png" alt="" /></div>
+        <div class="m_cell_hd m_cell_primary"><h4>拉人入伙</h4></div>
+        <div class="m_cell_ft"><img src="images/46.png" alt="" /></div>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" class="contain">
+        <div class="m_cell_hd"><img src="images/57.png" alt="" /></div>
+        <div class="m_cell_hd m_cell_primary"><h4>联系我们</h4></div>
+        <div class="m_cell_ft"><img src="images/46.png" alt="" /></div>
+      </a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <a href="javascript:void(0)">
+        <div class="m_cell_hd"><img src="images/58.png" alt="" /></div>
+        <div class="m_cell_hd m_cell_primary"><h4>设置</h4></div>
+        <div class="m_cell_ft"><img src="images/46.png" alt="" /></div>
+      </a>
+    </li>
+  </ul>
+</div>
+<!--列表end-->
+
+<!--联系我们弹窗start-->
+<div class="hover01 disable"></div>
+<div class="box01 disable">
+  <ul>
+    <img src="images/42.png" alt="" class="close01">
+    <div class="contain-box">
+      <h4>客服电话<i>010-45632158</i></h4>
+      <a href="tel:010-45632158">拨打</a>
+    </div>
+  </ul>  
+</div>
+<!--联系我们弹窗end-->
+
+<!--上传照片start-->
+<div class="hover disable"></div>
+<div class="upload-img disable">
+  <ul>
+    <li><a href="javascript:void(0)">拍照</a></li>
+    <li><a href="javascript:void(0)">从相册中选取</a></li>
+  </ul>
+  <ul>
+    <li><a href="javascript:void(0)" class="esc">取消</a></li>
+  </ul>
+</div>
+</div>
 <!--热门活动end-->
 <div class="line120"></div>
 <!--底部start-->
-<!--<div class="line98"></div>
+<div class="line98"></div>
 <div class="footer">
-  <a href="##" title="" class="on">
+  <a href="javascript:selectview(1)" title="" class="on">
     <i class="f_ico01"></i>
     <h4>首页</h4>
   </a>
-  <a href="##" title="">
+  <a href="javascript:selectview(2)" title="">
     <em>1</em>
     <i class="f_ico02"></i>
     <h4>消息</h4>
   </a>
-  <a href="javascript:clicked('../../htmls/MyUserInfo/MyMain.html',true);" title="">
+  <a href="javascript:selectview(3)" title="">
     <i class="f_ico03"></i>
     <h4>我的</h4>
   </a>
-</div>-->
+</div>
+
 <!--底部end-->
 </body>
 <script src="js/mui.min.js"></script>
@@ -138,9 +278,46 @@ mui.init();
 
 
 
+//mui('.footer').on('tap', 'a', function(e) {
+//	var targetTab = this.getAttribute('href');
+//	if (targetTab=="1"){
+//		 $("#index").show();
+//		 $("#message").hide();
+//		 $("#setting").hide();
+//	}
+//		if (targetTab=="2"){
+//		 $("#index").hide();
+//		 $("#message").show();
+//		 $("#setting").hide();
+//	}
+//	if (targetTab=="3"){
+//		 $("#index").hide();
+//		 $("#message").hide();
+//		 $("#setting").show();
+//	}
+//	
+//)}
 
 
-       
+
+ function	selectview(x){
+ if (x=='1'){
+ 			 $("#index").show();
+		 $("#message").hide();
+		 $("#setting").hide();
+ }
+  if (x=='2'){
+		 $("#index").hide();
+		 $("#message").show();
+		 $("#setting").hide();
+ }
+   if (x=='3'){
+		 $("#index").hide();
+		 $("#message").hide();
+		 $("#setting").show();
+ }
+}
+
  function	goUrlReg(){
  mui.openWindow(
  {
@@ -150,26 +327,8 @@ mui.init();
 }
     
 document.getElementById("ActivitySelected").addEventListener('tap',function () {
-	
-	//var mainView = plus.webview.currentWebview().parent();
-//	var mainView = plus.webview.getWebviewById("MainView");
-//	var subView = plus.webview.create('htmls/ActivitySpread/MobileActivitySelected.html', 'sub', {
-//top: '0px',
-//bottom: '98px'
-//});
-//
-//mainView.append(subView);
-//subView.addEventListener('loaded', function() {
-//subView.show('slide-in-right');
-//
-//});
-//
-//		subView.addEventListener('close',function(){//页面关闭后可再次打开
-//			subView=null;
-//		},false);
 
-
-subClicked('htmls/ActivitySpread/MobileActivitySelected.html',true);
+clicked('htmls/ActivitySpread/MobileActivitySelected.html',true);
 
 });   
      
