@@ -176,5 +176,27 @@
 			"images/14.png",
 			"images/10.png"
 		]
+	},
+	"htmls/Register/RegisterFirst.html": {
+		"resources": [
+			"images/2.jpg",
+			"images/12.png",
+			"images/19.png",
+			"images/21.png",
+			"images/13.png",
+			"images/11.png",
+			"images/15.png",
+			"images/17.png",
+			"images/14.png",
+			"images/10.png",
+			"images/18.png",
+			"images/16.png",
+			"js/main.js",
+			"js/jquery-1.7.min.js",
+			"js/public.js",
+			"css/style.css",
+			"js/pulsClick.js",
+			"js/mui.min.js"
+		]
 	}
 }

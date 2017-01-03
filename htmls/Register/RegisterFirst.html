@@ -1,266 +1,248 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=750,user-scalable=0" />
-<meta name="format-detection" content="telephone=no" />
-<link type="text/css" href="../../css/style.css" rel="stylesheet" />
-<link type="text/css" href="../../css/mui.min.css" rel="stylesheet" />
-<script type="text/javascript" src="../../js/jquery-1.7.min.js"></script>
-<script type="text/javascript" src="../../js/main.js"></script>
-<script type="text/javascript" src="../../js/public.js"></script>
-<title>无标题文档</title>
-</head>
 
-<body>
-<!--头部start-->
-<div class="header header-bg">
-  <ul>
-    <h1>注册</h1>
-    <a href="##" title="" class="back"><img src="../../images/10.png" alt="" width="24" height="42"/></a>
-  </ul>
-</div>
-<!--头部end-->
+	<head>
+		<meta charset="utf-8">
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+		<meta name="format-detection" content="telephone=no" />
+		<link type="text/css" href="../../css/style.css" rel="stylesheet" />
+		<script type="text/javascript" src="../../js/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="../../js/main.js"></script>
+		<script src="../../js/pulsClick.js" type="text/javascript"></script>
+		<title>无标题文档</title>
+	</head>
 
-<!--注册start-->
-<div class="resiger">
-  <ul class="form">
-    <li class="ico01">
-      <div><input type="text" value="" placeholder="请输入手机号" id="userTel"/></div>
-    </li>
-    <li class="ico02">
-      <div class="clearfix get-code">
-        <ul class="fl"><input type="text" value="" placeholder="请输入验证码" id="smscode"/></ul>
-        <ul class="fr code"><a href="javascript:sendMessage();">获取验证码</a></ul>
-      </div>  
-    </li>
-    <li class="ico03">
-      <div><input type="text" value="" placeholder="请输入6-12非纯数字密码" id="loginpass"/></div>
-    </li>
-    <li class="ico04">
-      <div><input type="text" value="" placeholder="请再次输入密码" id="reloginpass"/></div>
-    </li>
-    <li class="ico05">
-      <div><input type="text" value="" placeholder="请输入邀请码（可不填）" id="inviteCode"/></div>
-    </li>
-  </ul>
-  <ul class="form01">
-    <li><span><i><input type="checkbox"/>我已阅读并同意<a href="#" title="">《用户隐私协议》</a></i></span></li>
-    <li><input type="button" value="下一步" class="button" id="btnsave"/></li>
-    <li id="NoReceive"><p>无法获取验证码</p></li>
-  </ul>
-</div>
-<!--注册end-->
+	<body>
+		<!--头部start-->
+		<div class="header header-bg">
+			<ul>
+				<h1>注册</h1>
+				<a href="javascript:back();" title="" class="back"><img src="../../images/10.png" alt="" width="24" height="42" /></a>
+			</ul>
+		</div>
+		<!--头部end-->
 
-</body>
+		<!--注册start-->
+		<div class="resiger">
+			<ul class="form">
+				<li class="ico01">
+					<div><input type="text" value="" placeholder="请输入手机号" id="userTel" /></div>
+				</li>
+				<li class="ico02">
+					<div class="clearfix get-code">
+						<ul class="fl"><input type="text" value="" placeholder="请输入验证码" id="scode" /></ul>
+						<ul class="fr code"><input type="button" value="获取验证码" class="buttoncode" id="btnSendCode" onclick="sendMessage();" />
+							<!--<a href="javascript:sendMessage();">获取验证码</a>-->
+						</ul>
+					</div>
+				</li>
+				<li class="ico03">
+					<div><input type="text" value="" placeholder="请输入6-12非纯数字密码" id="loginpass" /></div>
+				</li>
+				<li class="ico04">
+					<div><input type="text" value="" placeholder="请再次输入密码" id="reloginpass" /></div>
+				</li>
+				<li class="ico05">
+					<div><input type="text" value="" placeholder="请输入邀请码（可不填）" id="inviteCode" /></div>
+				</li>
+			</ul>
+			<ul class="form01">
+				<li><span><i><input type="checkbox"/>我已阅读并同意<a href="#" title="">《用户隐私协议》</a></i></span></li>
+				<li><input type="button" value="下一步" class="button" id="btnsave" /></li>
+				<li id="NoReceive">
+					<p>无法获取验证码</p>
+				</li>
+			</ul>
+		</div>
+		<!--注册end-->
 
-<script src="../../js/mui.min.js"></script>
-<script>
+	</body>
+	<script type="text/javascript" src="../../js/public.js"></script>
+	<script src="../../js/mui.min.js"></script>
+	<script>
+		var domainUrl = GetMvcApiDomain();
 
+		function MathRand() {
 
-			mui.init();
+			var Num = "";
 
-var domainUrl = GetMvcApiDomain();
+			for(var i = 0; i < 6; i++) {
 
+				Num += Math.floor(Math.random() * 10);
 
+			}
+			return Num;
+		}
 
-var InterValObj; //timer变量，控制时间
-var count = 80; //间隔函数，1秒执行
-var curCount; //当前剩余秒数
-var code = ""; //验证码
-var codeLength = 6; //验证码长度 
+		var InterValObj; //timer变量，控制时间
+		var count = 60; //间隔函数，1秒执行
+		var curCount; //当前剩余秒数
+		var code = ""; //验证码
+		var codeLength = 6; //验证码长度 
+		var smsCode = MathRand();
 
-function sendMessage() {
+		function sendMessage() {
 
-            curCount = count;
-            
-            var userTel = $("#userTel").val(); //用户uid
-            if (userTel.length == 0 || userTel=="") {
-                $("#userTel").val("");
-                $("#userTel").focus();
-                mui.toast("请输入验证手机号！", "提示", "确定", null);
-                return false;
-            }else {
-	             $.ajax({
-               url: domainUrl + "mobile/userinfo/register",
-               type: 'get',
-               dataType: "json",
-               data: {UserName:userTel},
-               success: function (data) {
-                if(data.code=="201"){
-                	mui.toast('手机号已在系统中存在，请重新输入', '用户注册', function() {
-		              $("#userTel").val("");
-		              $("#userTel").focus();
-	                return false;		    
-		               });
-                }
-                else{
-                	
-                	sendData(userTel);
-                }
+			curCount = count;
 
-               },
-               error: function () {
-    	         mui.alert('网络错误，请稍后再试');
-                }
-             });
+			var userTel = $("#userTel").val(); //用户uid
+			if(userTel.length == 0 || userTel == "") {
+				$("#userTel").val("");
+				$("#userTel").focus();
+				plus.nativeUI.toast("请输入验证手机号！", {
+					duration: "long"
+				});
+				return false;
+			} else {
+				var jsonData = {
+					"telNo": userTel,
+					"smsCode": smsCode,
+					"smsSource": '0'
+				}
 
-     } 
+				$.ajax({
+					url: domainUrl + "message/smsCode",
+					type: 'POST',
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					crossDomain: true,
+					data: JSON.stringify(jsonData),
+					//				             data: jsonData,
+					success: function(data) {
+						if(data.status_code == "000000") {
+							$("#btnSendCode").attr("disabled", "true");
+							$("#btnSendCode").val(curCount + "秒后重新获取");
+							InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+							localStorage.setItem("snumber", smsCode);
+							plus.nativeUI.toast("验证短信已为您发送，请查收", {
+								duration: "long"
+							});
 
-            
+						} else {
+							plus.nativeUI.toast(data.result, {
+								duration: "long"
+							});
+						}
 
+					},
+					error: function() {
+						plus.nativeUI.toast("网络错误，请稍后再试", {
+							duration: "long"
+						});
+					}
+				});
+			}
 
-    }
-  
-  
-  //向后台发送处理数据
-    function sendData(usertel) {
-	             $.ajax({
-               url: domainUrl + "api/SendSms/getCodeBySendSms",
-               type: 'get',
-               dataType: "json",
-               data: {Tel:usertel},
-               success: function (data) {
-                if(data.code=="200"){
-                    $("#btnSendCode").attr("disabled", "true");
-                    $("#btnSendCode").val(curCount + "秒后重新获取");
-                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
-                    localStorage.setItem("snumber",data.smsnumber);
-                    mui.alert("验证短信已为您发送，请查收");
+		}
 
-                }
-                else{
-                	
-                	  mui.alert("验证短信发送失败，请稍后再试!");
-                }
+		function SetRemainTime() {
+			if(curCount == 0) {
+				window.clearInterval(InterValObj); //停止计时器
+				$("#btnSendCode").removeAttr("disabled"); //启用按钮
+				$("#btnSendCode").val("重新发送验证码");
+				code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
+				sessionStorage.setItem("snumber", "");
+			} else {
+				curCount--;
+				$("#btnSendCode").val(curCount + "秒后重新获取");
+			}
+		}
 
-               },
-               error: function () {
-    	         mui.alert('网络错误，请稍后再试');
-                }
-             });
-    }
+		function RegCheck() {
 
+			var snumber = localStorage.getItem("snumber");
+			var username = document.getElementById('userTel').value;;
+			var scode = document.getElementById('scode').value;
+			var loginpass = document.getElementById('loginpass').value;
+			var reloginpass = document.getElementById('reloginpass').value;
+			var inviteCode = document.getElementById('inviteCode').value;
+			if(snumber == null || snumber == "") {
+				plus.nativeUI.toast("请进行手机短信验证", {
+								duration: "long"
+							});
+				$("#userTel").focus();
+				return false;
+			} else if(scode == null || scode == '') {
+								plus.nativeUI.toast("请输入验证码", {
+								duration: "long"
+							});
+				$("#scode").focus();
+				return false;
+			} else if(loginpass.length < 6 || loginpass.length > 18) {
+				plus.nativeUI.toast("请输入6-18位的密码", {
+								duration: "long"
+							});
+				$("#loginpass").attr("value", "");
+				$("#loginpass").focus();
+				return false;
+			} else if(loginpass != reloginpass) {
+				plus.nativeUI.toast("两次密码输入不一样", {
+								duration: "long"
+						});
+				$("#reloginpass").attr("value", "");
+				$("#reloginpass").focus();
+				return false;
+			} else {
 
- function SetRemainTime() {
-            if (curCount == 0) {
-                window.clearInterval(InterValObj); //停止计时器
-                $("#btnSendCode").removeAttr("disabled"); //启用按钮
-                $("#btnSendCode").val("重新发送验证码");
-                code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
-                sessionStorage.setItem("snumber", ""); 
-            }
-            else {
-                curCount--;
-                $("#btnSendCode").val(curCount + "秒后重新获取");
-            }
-        }
- 
- function RegCheck() {
+				infoRegSave(username, scode, loginpass, inviteCode);
 
- var snumber = localStorage.getItem("snumber");
- var username = document.getElementById('userTel').value;;
- var smscode = document.getElementById('smscode').value; 
- var loginpass = document.getElementById('loginpass').value;
- var reloginpass = document.getElementById('reloginpass').value;
- var inviteCode = document.getElementById('inviteCode').value;
-  if (snumber == null || snumber=="") {
-   mui.alert("请进行手机验证!");
-   $("#userTel").focus();
-   return false;	
-   }
-   else if(smscode==null || smscode==''){
-   	    mui.alert("请输入验证码!");
-        $("#smscode").focus();
-        return false;	
-   }else if(smscode!=snumber) {
-   	    	mui.alert("验证码输入错误，请重新输入!");
-          $("#smscode").focus();
-           return false;	
-   }else if(loginpass.length < 6 || loginpass.length > 18) {
-            mui.alert("请输入6-18位的密码！");
-            $("#loginpass").attr("value", "");
-            $("#loginpass").focus();
-            return false;	
-   }else if (loginpass != reloginpass) {
-            mui.alert("两次密码输入不一样！");
-            $("#reloginpass").attr("value", "");
-            $("#reloginpass").focus();
-            return false;	
-   }else{
+			}
+		}
 
-   		   infoRegSave(username,loginpass,smscode,userKey,doctorKey,shopbm,shopname,masterbm);     
-   	
-   }
-   
-   
-}
- 
-function infoRegSave(username,userpass,smscode,inviteCode) {
- 
-         var jsonData = {
-            "telno":username,
-            "msgcode":userpass,
-            "password":partThreeItem1,
-            "reginvitecode":inviteCode,
-            "realname":"",
-            "college":"",
-            "mailbox":""
+		function infoRegSave(telno, msgcode, loginpass, reginvitecode) {
 
-           }
- 
-         $.ajax({
-               url: domainUrl + "userinfo/register",
-               type: 'post',
-               dataType: "json",
-               data:jsonData,
-               success: function (data) {
-                if(data.code=="200"){
-                   localStorage.setItem("username",username);
-                   localStorage.setItem("tokenLogin",data.code);
-                    mui.alert("注册成功！");
-                    mui.openWindow(
-					          {
-						         url:'index.html',
-						         id:'index',
-					          });
+			var jsonData = {
+				"telno": telno,
+				"smscode": msgcode,
+				"password": loginpass,
+				"x": reginvitecode,
+				"realname": "飞飞",
+				"college": "北京大学",
+				"mailbox": "123123@123.com"
 
-                }
-                else if(data.code=="201" || data.code=="202"){
-                	  mui.alert("注册失败，系统已存在该手机号!");
-                	   $("#userTel").attr("value", "");
-                     $("#userTel").focus();
-                     return false;	
-                }else{
-                	  mui.alert("注册失败，系统错误!");
-                	   $("#userTel").attr("value", "");
-                     $("#userTel").focus();
-                     return false;	
-                }
+			}
 
-               },
-               error: function () {
-    	         mui.toast('网络错误，请稍后再试');
-                }
-             });     
-
-}
+			$.ajax({
+				url: domainUrl + "userinfo/register",
+				type: 'POST',
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify(jsonData),
+				success: function(data) {
+					if(data.status_code == "000000") {
+				     clicked("RegisterBaseInfo.html",true);
 
 
+					} else {
+						plus.nativeUI.toast(data.result, {
+								duration: "long"
+						});
+						return false;
+					}
 
-document.getElementById("btnsave").addEventListener('tap',function(){	
-RegCheck();
-         
+				},
+				error: function() {
+					plus.nativeUI.toast("网络错误，请稍后再试", {
+								duration: "long"
+						});
+				}
+			});
 
-}); 
+		}
 
-document.getElementById("NoReceive").addEventListener('tap',function(){	
- mui.openWindow(
- {
-	url:'TokenNotReceiveHint.html',
-	id:'TokenNotReceiveHint',
- })
-}); 
+		document.getElementById("btnsave").addEventListener('tap', function() {
+			RegCheck();
 
-</script>
+		});
+
+		document.getElementById("NoReceive").addEventListener('tap', function() {
+			mui.openWindow({
+				url: 'TokenNotReceiveHint.html',
+				id: 'TokenNotReceiveHint',
+			})
+		});
+	</script>
+
 </html>
